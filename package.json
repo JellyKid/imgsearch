@@ -1,0 +1,23 @@
+{
+  "name": "imgsearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JellyKid/imgsearch.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JellyKid/imgsearch/issues"
+  },
+  "homepage": "https://github.com/JellyKid/imgsearch#readme",
+  "dependencies": {
+    "moment": "^2.12.0"
+  }
+}
