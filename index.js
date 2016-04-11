@@ -26,14 +26,17 @@ function getClientId(req,res,next) {
     if(err){
       return next(new Error(err));
     }
-    req.clientid = clientid;
+    if(/([\w\d])/.test(clientid)){
+      req.clientid = /([\w\d]+)/.exec(clientid)[1];
+    }
     return next();
   });
 }
 
 function buildPath(req,res,next) {
   req.page = req.query.offset || defaults.page;
-  req.ipp = req.query.ipp || defaults.itemsPerPage;
+  // req.ipp = req.query.ipp || defaults.itemsPerPage;
+  req.ipp = defaults.itemsPerPage;
   var imgurPage = calcImgurPage(req.ipp,req.page);
   req.imgsearchpath = '/3/gallery/search/top/'+imgurPage+'.json?q="' + req.params.search + '"';
   return next();
@@ -66,11 +69,12 @@ function logSearch(req,res,next) {
 
 
 function newReq(req,res,next) {
+  var cid = 'Client-ID ' + req.clientid;
   https.request({
     host: 'api.imgur.com',
     method: 'GET',
     path: req.imgsearchpath,
-    headers: {Authorization: 'Client-ID ' + req.clientid}
+    headers: {Authorization: cid}
   }, function(result){
     var body = "";
     if(result){
