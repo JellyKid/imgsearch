@@ -34,6 +34,10 @@ function getClientId(req,res,next) {
 }
 
 function buildPath(req,res,next) {
+  if(req.params.search === ''){
+    res.redirect(302,'../index.html');
+    return;
+  }
   req.page = req.query.offset || defaults.page;
   // req.ipp = req.query.ipp || defaults.itemsPerPage;
   req.ipp = defaults.itemsPerPage;
